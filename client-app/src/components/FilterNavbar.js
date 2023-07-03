@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { View, TextInput, StyleSheet, Picker } from "react-native";
 
-const FilterNavbar = () => {
+const FilterNavbar = ({ onSearchChange }) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
   const handleSearchChange = (text) => {
+    onSearchChange(text);
     setSearchValue(text);
   };
 

@@ -2,15 +2,25 @@ import React, { useEffect, useState } from "react";
 import { FlatList, View, Text, Image, StyleSheet } from "react-native";
 import { flexLogo } from "../constants/Images";
 import FilterNavbar from "../components/FilterNavbar";
+import axios from "react-native-axios";
 
 const Menu = () => {
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/products")
-      .then((response) => response.json())
-      .then((data) => setProducts(data.products));
+    axios.get("https://dummyjson.com/products").then((response) => {
+      setProducts(response.data.products);
+      setFilteredProducts(response.data.products);
+    });
   }, []);
+
+    const handleSearchChange = (text) => {
+      const filtered = products.filter((product) =>
+        product.title.toLowerCase().includes(text.toLowerCase())
+      );
+      setFilteredProducts(filtered);
+    };
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
@@ -26,9 +36,9 @@ const Menu = () => {
     <>
       <View style={styles.container}>
         <Image source={flexLogo} style={styles.logoImg} />
-        <FilterNavbar />
+        <FilterNavbar onSearchChange={handleSearchChange} />
         <FlatList
-          data={products}
+          data={filteredProducts}
           renderItem={renderItem}
           keyExtractor={(item) => item.id.toString()}
           numColumns={2}
