@@ -1,5 +1,12 @@
 # Shopping-Prod
+## Installation
 
+1. Make sure you have Node.js installed on your machine.
+2. Clone this repository: https://github.com/EdonaElshani/Shopping-Prod.git
+3. Navigate to the project directory:
+   #### cd client-app
+   #### npx expo start
+   
 <div style="flex-direction: column;">
   <div >
     <h2>Login Screen</h2>
