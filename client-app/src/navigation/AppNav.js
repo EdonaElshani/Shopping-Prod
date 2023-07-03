@@ -12,7 +12,7 @@ const AppNav = () => {
     <>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={"ForgotPassword"}
+          initialRouteName={"ConfirmedPassword"}
           screenOptions={{
             headerShown: false,
           }}
