@@ -12,7 +12,7 @@ const AppNav = () => {
     <>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName={"Menu"}
+          initialRouteName={"Login"}
           screenOptions={{
             headerShown: false,
           }}

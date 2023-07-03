@@ -11,7 +11,7 @@ import {
 import { flexLogo } from "../constants/Images";
 import CustomInput from "../components/CustomInput";
 
-const Login = () => {
+const Login = ({ navigation }) => {
   const [rememberMeIsSelected, setRememberMeIsSelected] = useState(false);
 
   return (
@@ -44,7 +44,10 @@ const Login = () => {
           </TouchableOpacity>
         </View>
         <View>
-          <Pressable style={styles.btn}>
+          <Pressable
+            style={styles.btn}
+            onPress={() => navigation.navigate("Menu")}
+          >
             <Text style={styles.btnText}>Sign In</Text>
           </Pressable>
         </View>
