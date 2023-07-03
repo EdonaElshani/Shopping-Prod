@@ -7,20 +7,35 @@ import axios from "react-native-axios";
 const Menu = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [brands, setBrands] = useState([]);
 
   useEffect(() => {
     axios.get("https://dummyjson.com/products").then((response) => {
-      setProducts(response.data.products);
-      setFilteredProducts(response.data.products);
+      const { products, brands } = response.data;
+      setProducts(products);
+      setFilteredProducts(products);
+      setBrands(brands);
     });
   }, []);
 
-    const handleSearchChange = (text) => {
-      const filtered = products.filter((product) =>
-        product.title.toLowerCase().includes(text.toLowerCase())
-      );
-      setFilteredProducts(filtered);
-    };
+  const handleSearchChange = (text) => {
+    const filtered = products.filter((product) =>
+      product.title.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredProducts(filtered);
+  };
+
+  const handleCategoryChange = (category) => {
+    const filteredByCategory = products.filter((product) =>
+      product.category.toLowerCase().includes(category.toLowerCase())
+    );
+    setFilteredProducts(filteredByCategory);
+    // Get unique brands from filtered products
+    const uniqueBrands = [
+      ...new Set(filteredByCategory.map((product) => product.brand)),
+    ];
+    setBrands(uniqueBrands);
+  };
 
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
@@ -36,7 +51,11 @@ const Menu = () => {
     <>
       <View style={styles.container}>
         <Image source={flexLogo} style={styles.logoImg} />
-        <FilterNavbar onSearchChange={handleSearchChange} />
+        <FilterNavbar
+          onSearchChange={handleSearchChange}
+          onCategoryChange={handleCategoryChange}
+          brands={brands}
+        />
         <FlatList
           data={filteredProducts}
           renderItem={renderItem}
