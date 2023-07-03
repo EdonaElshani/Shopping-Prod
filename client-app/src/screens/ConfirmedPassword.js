@@ -2,7 +2,6 @@ import React from "react";
 import { Image, StyleSheet, Text, View, Pressable } from "react-native";
 import { flexLogo } from "../constants/Images";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import CustomInput from "../components/CustomInput";
 
 const ConfirmedPassword = () => {
   return (
@@ -20,12 +19,6 @@ const ConfirmedPassword = () => {
           <Pressable>
             <Text style={styles.goBackText}>Go back</Text>
           </Pressable>
-        </View>
-        <View>
-          <CustomInput
-            placeholder="Username / Email"
-            icon="account-circle-outline"
-          />
         </View>
         <Text style={styles.confirmationText}>
           Please enter your username or email address so we can send you a
