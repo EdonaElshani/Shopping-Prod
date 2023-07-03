@@ -13,4 +13,8 @@
     <h2>Confirmation Link Screen </h2>
     <img src="./client-app/src/assets/Images/ConfirmationLink.PNG" alt="Confirmation Link Screen" width="50%"/>
   </div>
+      <div>
+    <h2>Menu </h2>
+    <img src="./client-app/src/assets/Images/Menu.PNG" alt="Menu Screen" width="50%"/>
+  </div>
 </div>
