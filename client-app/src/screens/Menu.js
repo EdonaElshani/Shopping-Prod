@@ -1,8 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, View, Text, Image, StyleSheet } from "react-native";
+import {
+  FlatList,
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
 import { flexLogo } from "../constants/Images";
 import FilterNavbar from "../components/FilterNavbar";
 import axios from "react-native-axios";
+
+const { height, width } = Dimensions.get("window");
 
 const Menu = () => {
   const [products, setProducts] = useState([]);
@@ -30,13 +39,19 @@ const Menu = () => {
       product.category.toLowerCase().includes(category.toLowerCase())
     );
     setFilteredProducts(filteredByCategory);
-    // Get unique brands from filtered products
     const uniqueBrands = [
       ...new Set(filteredByCategory.map((product) => product.brand)),
     ];
     setBrands(uniqueBrands);
   };
-
+  const handleBrandChange = (brand, selectedCategory) => {
+    const filteredByBrand = products.filter(
+      (product) =>
+        product.brand.toLowerCase().includes(brand.toLowerCase()) &&
+        product.category.toLowerCase().includes(selectedCategory.toLowerCase())
+    );
+    setFilteredProducts(filteredByBrand);
+  };
   const renderItem = ({ item }) => (
     <View style={styles.itemContainer}>
       <Image source={{ uri: item.thumbnail }} style={styles.itemImage} />
@@ -54,6 +69,7 @@ const Menu = () => {
         <FilterNavbar
           onSearchChange={handleSearchChange}
           onCategoryChange={handleCategoryChange}
+          onBrandChange={handleBrandChange}
           brands={brands}
         />
         <FlatList
@@ -70,15 +86,16 @@ const Menu = () => {
 export default Menu;
 
 const styles = StyleSheet.create({
-  logoImg: {
-    width: "200px",
-    height: "120px",
-    marginVertical: "20px",
-  },
   container: {
     backgroundColor: "#1E3445",
     alignItems: "center",
     padding: "10px",
+    minHeight: height,
+  },
+  logoImg: {
+    width: "200px",
+    height: "120px",
+    marginVertical: "20px",
   },
   itemContainer: {
     marginBottom: 16,

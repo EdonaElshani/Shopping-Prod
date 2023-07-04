@@ -8,7 +8,12 @@ import {
   Text,
 } from "react-native";
 
-const FilterNavbar = ({ onSearchChange, onCategoryChange, brands }) => {
+const FilterNavbar = ({
+  onSearchChange,
+  onCategoryChange,
+  brands,
+  onBrandChange,
+}) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
 
@@ -20,6 +25,9 @@ const FilterNavbar = ({ onSearchChange, onCategoryChange, brands }) => {
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
     onCategoryChange(category);
+  };
+  const handleBrandChange = (brand) => {
+    onBrandChange(brand, selectedCategory);
   };
 
   return (
@@ -48,7 +56,10 @@ const FilterNavbar = ({ onSearchChange, onCategoryChange, brands }) => {
         {brands &&
           brands.length > 0 &&
           brands.map((brand) => (
-            <TouchableOpacity style={styles.brandBtn}>
+            <TouchableOpacity
+              style={styles.brandBtn}
+              onPress={() => handleBrandChange(brand)}
+            >
               <Text style={styles.brandText}>#{brand}</Text>
             </TouchableOpacity>
           ))}
