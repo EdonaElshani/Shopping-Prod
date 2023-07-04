@@ -16,6 +16,7 @@ const FilterNavbar = ({
 }) => {
   const [searchValue, setSearchValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [activeBtn, setActiveBtn] = useState(false);
 
   const handleSearchChange = (text) => {
     onSearchChange(text);
@@ -28,6 +29,7 @@ const FilterNavbar = ({
   };
   const handleBrandChange = (brand) => {
     onBrandChange(brand, selectedCategory);
+    //setActiveBtn(true)
   };
 
   return (

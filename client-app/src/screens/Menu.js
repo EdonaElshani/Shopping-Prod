@@ -11,7 +11,7 @@ import { flexLogo } from "../constants/Images";
 import FilterNavbar from "../components/FilterNavbar";
 import axios from "react-native-axios";
 
-const { height, width } = Dimensions.get("window");
+const { height } = Dimensions.get("window");
 
 const Menu = () => {
   const [products, setProducts] = useState([]);
